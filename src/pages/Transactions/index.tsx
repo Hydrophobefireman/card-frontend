@@ -91,9 +91,11 @@ export function TXBox() {
                     display: "flex",
                   })}
                 >
-                  <DotsHorizontalIcon
-                    class={css({transform: "rotate(90deg)"})}
-                  />
+                  <button>
+                    <DotsHorizontalIcon
+                      class={css({transform: "rotate(90deg)"})}
+                    />
+                  </button>
                 </div>
               </Box>
             </div>

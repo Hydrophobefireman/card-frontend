@@ -154,6 +154,7 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
         <ThemeInput label="Spent" value={"" + card.config.spent} disabled />
         <ThemeInput label="CVV" value={"" + card.card_cvv} disabled />
         <ThemeInput label="Zip" value={"" + card.card_zipcode} disabled />
+        <Box row class={css({flexWrap: "wrap"})}></Box>
       </Box>
     </Modal>
   );
