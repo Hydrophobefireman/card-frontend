@@ -138,7 +138,7 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
       onClickOutside={close}
       class={css({
         pseudo: {
-          " .kit-modal": {
+          ".kit-modal": {
             overflow: "auto",
           },
         },
