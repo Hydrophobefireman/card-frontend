@@ -167,7 +167,7 @@ function CardDetails({card, close}: {card: IPhysicalCard; close(): void}) {
             />
             <ThemeInput
               label="Spent this month (USD)"
-              value={card.blob.spent ?? "0"}
+              value={card.blob.spent || "0"}
               type="number"
               disabled
             />
@@ -288,7 +288,7 @@ export function CardInputModal({
             {options[fns.cardType(number)] && (
               <Box>
                 <select
-                  class={css({background: "white"})}
+                  class={css({background: "white", marginBottom: "1rem"})}
                   label="Type"
                   onChange={(e) => setType(e.currentTarget.value)}
                   value={type as any}

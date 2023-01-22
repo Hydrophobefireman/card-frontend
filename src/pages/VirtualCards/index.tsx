@@ -173,6 +173,7 @@ export function CardInputModal({
   const {persist} = useAlerts();
   if (!resp?.cards?.map) return;
   async function handleSubmit() {
+    if (!selectedIds.size) return;
     const {result} = addVirtualCard([...selectedIds]);
     const {data, error} = await result;
     if (error) {
