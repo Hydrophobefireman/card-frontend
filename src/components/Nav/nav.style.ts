@@ -36,6 +36,7 @@ export const navDropdownContainerCls = (isOpen: boolean) =>
 
 export const navActionButtonCls = css({
   borderRadius: "var(--kit-radius)",
+  color: "#1d1d1d",
   width: "100%",
   textAlign: "left",
   transition: "0.3s ease",
