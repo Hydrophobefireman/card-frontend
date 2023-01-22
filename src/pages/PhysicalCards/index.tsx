@@ -136,6 +136,7 @@ function CardDetails({card, close}: {card: IPhysicalCard; close(): void}) {
         type: "error",
         onActionClick: () => deleteCard(card),
         actionText: "retry",
+        cancelText: "okay",
       });
       return;
     }
@@ -170,6 +171,7 @@ function CardDetails({card, close}: {card: IPhysicalCard; close(): void}) {
                 type: "error",
                 onActionClick: () => deleteCard(card),
                 actionText: "retry",
+                cancelText: "okay",
               });
               return;
             }
@@ -251,6 +253,7 @@ export function CardInputModal({
         type: "error",
         onActionClick: handleSubmit,
         actionText: "retry",
+        cancelText: "okay",
       });
       return;
     }

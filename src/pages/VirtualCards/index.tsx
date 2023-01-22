@@ -135,6 +135,7 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
         type: "error",
         onActionClick: handleDelete,
         actionText: "retry",
+        cancelText: "okay",
       });
       return;
     }
@@ -214,6 +215,7 @@ export function CardInputModal({
         type: "error",
         onActionClick: handleSubmit,
         actionText: "retry",
+        cancelText: "okay",
       });
       return;
     }
