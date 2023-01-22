@@ -124,7 +124,10 @@ function CardDetails({card, close}: {card: IPhysicalCard; close(): void}) {
   return (
     <Modal onClickOutside={close} onEscape={close} active={!!card}>
       <Box class={css({width: "100%", padding: "1rem"})}>
-        <Box horizontal="right" class={css({width: "100%"})}>
+        <Box
+          horizontal="right"
+          class={css({width: "100%", marginBottom: "1rem"})}
+        >
           <TextButton
             mode="error"
             variant="shadow"

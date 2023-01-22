@@ -8,6 +8,11 @@ import {
   useVirtualCards,
 } from "~/handlers/cards";
 
+import {
+  DotsHorizontalIcon,
+  MenuAlt3Icon,
+  MenuIcon,
+} from "@hydrophobefireman/kit-icons";
 import {Box} from "@hydrophobefireman/kit/container";
 import {Text} from "@hydrophobefireman/kit/text";
 
@@ -30,7 +35,15 @@ export function TXBox() {
   return (
     <Box>
       <Text.h1>Your transactions will show up here</Text.h1>
-      <Box class={css({gap: "1rem", width: "100%"})}>
+      <Box
+        class={css({
+          gap: "1.5rem",
+          width: "100%",
+          maxWidth: "600px",
+          boxShadow: "var(--kit-shadow)",
+          padding: "3rem",
+        })}
+      >
         {resp?.map((x) => {
           const card = o[x.card_id];
           return (
@@ -43,7 +56,7 @@ export function TXBox() {
             >
               <div
                 class={css({
-                  transform: "scale(0.25)",
+                  transform: "scale(.25) translate(-30rem,-17rem)",
                   position: "absolute",
                   top: "0",
                   left: "0",
@@ -57,7 +70,32 @@ export function TXBox() {
                   name={card.name}
                 />
               </div>
-              <div>$ {x.amount}</div>
+              <Box
+                row
+                horizontal="left"
+                class={css({width: "100%", gap: "2rem"})}
+              >
+                <div class={css({marginLeft: "5rem"})}>
+                  <Text.div color="kit-shade-5">${x.amount}</Text.div>
+                  <div>{x.name}</div>
+                </div>
+                <div>
+                  <div>{x.category}</div>
+                  <div>{new Date(+x.date * 1000).toDateString()}</div>
+                </div>
+                <div
+                  class={css({
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    display: "flex",
+                  })}
+                >
+                  <DotsHorizontalIcon
+                    class={css({transform: "rotate(90deg)"})}
+                  />
+                </div>
+              </Box>
             </div>
           );
         })}
