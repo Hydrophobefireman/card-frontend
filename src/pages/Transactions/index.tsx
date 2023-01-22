@@ -51,7 +51,11 @@ export function TXBox() {
         })}
       >
         {activeTx && (
-          <Modal active>
+          <Modal
+            active
+            onClickOutside={() => setActiveTx(null)}
+            onEscape={() => setActiveTx(null)}
+          >
             <Text.h1
               class={css({
                 fontWeight: "bold",
