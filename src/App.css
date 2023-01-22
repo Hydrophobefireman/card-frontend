@@ -34,3 +34,8 @@ html {
   color: #1d1d1d;
   background-image: var(--light-gradient);
 }
+
+.kit-input-material:focus ~ label,
+.kit-input-material[data-kit-active] ~ label {
+  background: rgba(255, 255, 255, 0.6) !important;
+}

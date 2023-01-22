@@ -76,8 +76,13 @@ export function Register() {
               flex: 1,
             })}
           >
-            <span></span>
             <TextButton
+              class={css({
+                width: "100%",
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              })}
               disabled={formState === "pending"}
               mode="secondary"
               variant="shadow"
@@ -86,7 +91,8 @@ export function Register() {
             </TextButton>
           </div>
         </Box>
-        <Box horizontal="left">
+        <Box horizontal="center" class={css({marginTop: "2rem"})}>
+          Already have an account?{" "}
           <A class={css({textDecoration: "underline"})} href="/auth?mode=login">
             Login
           </A>

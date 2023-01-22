@@ -43,6 +43,12 @@ export function Login() {
           })}
         >
           <TextButton
+            class={css({
+              width: "100%",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            })}
             disabled={formState === "pending"}
             mode="secondary"
             variant="shadow"
@@ -51,12 +57,13 @@ export function Login() {
           </TextButton>
         </div>
       </Box>
-      <Box horizontal="left">
+      <Box horizontal="center" class={css({marginTop: "2rem"})}>
+        Need an account?{" "}
         <A
           class={css({textDecoration: "underline"})}
           href="/auth?mode=register"
         >
-          register
+          Register
         </A>
       </Box>
     </Form>

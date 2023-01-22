@@ -1,3 +1,5 @@
+import {css} from "catom";
+
 import {useMemo} from "@hydrophobefireman/ui-lib";
 import {Box} from "@kit/container";
 import {useLocation} from "@kit/hooks";
@@ -12,5 +14,14 @@ export function Auth() {
   const mode: "register" | "login" =
     params.get("mode") === "register" ? "register" : "login";
 
-  return <Box>{mode === "login" ? <Login /> : <Register />}</Box>;
+  return (
+    <Box
+      class={css({
+        color: "#1d1d1d",
+        "--kit-foreground": "#1d1d1d",
+      } as any)}
+    >
+      {mode === "login" ? <Login /> : <Register />}
+    </Box>
+  );
 }
