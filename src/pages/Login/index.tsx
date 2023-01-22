@@ -20,7 +20,7 @@ export default function Landing() {
           margin: "0",
         })}
       >
-        Cards
+        UniCards
       </Text.h1>
       <Text.p class={css({fontSize: "1.25rem", marginBottom: "1rem"})}>
         Virtual Cards for you
