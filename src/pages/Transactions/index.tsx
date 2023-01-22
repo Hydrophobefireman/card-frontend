@@ -52,7 +52,14 @@ export function TXBox() {
       >
         {activeTx && (
           <Modal active>
-            <Text.h1 class={css({fontWeight: "bold", fontSize: "1.2rem"})}>
+            <Text.h1
+              class={css({
+                fontWeight: "bold",
+                fontSize: "1.2rem",
+                textAlign: "center",
+                margin: "0.5rem",
+              })}
+            >
               Cards Used
             </Text.h1>
             <Box>
