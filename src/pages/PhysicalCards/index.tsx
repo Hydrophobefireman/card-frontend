@@ -19,10 +19,16 @@ import {useAlerts} from "@hydrophobefireman/kit/alerts";
 import {TextButton} from "@hydrophobefireman/kit/button";
 import {Box} from "@hydrophobefireman/kit/container";
 import {Text} from "@hydrophobefireman/kit/text";
-import {useState} from "@hydrophobefireman/ui-lib";
+import {useEffect, useState} from "@hydrophobefireman/ui-lib";
 import {Modal} from "@kit/modal";
 
 export default function PhysicalCards() {
+  // useEffect(() => {
+  //   const col = document.body.style.background;
+  //   document.body.style.background =
+  //     "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)";
+  //   return () => (document.body.style.background = col);
+  // }, []);
   return (
     <SafeLayout>
       <Nav />

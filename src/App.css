@@ -10,6 +10,20 @@ a {
 }
 
 body {
-  --kit-foreground: #212427;
+  --kit-foreground: white;
   overflow-x: hidden;
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+  height: 100%;
+}
+
+html {
+  height: 100vh;
+}
+
+.kit-modal {
+  --kit-foreground: #1d1d1d;
 }

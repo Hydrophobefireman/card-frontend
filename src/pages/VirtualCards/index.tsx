@@ -18,10 +18,11 @@ import {useAlerts} from "@hydrophobefireman/kit/alerts";
 import {TextButton} from "@hydrophobefireman/kit/button";
 import {Box} from "@hydrophobefireman/kit/container";
 import {Text} from "@hydrophobefireman/kit/text";
-import {useState} from "@hydrophobefireman/ui-lib";
+import {useEffect, useState} from "@hydrophobefireman/ui-lib";
 import {Modal} from "@kit/modal";
 
 export default function VirtualCards() {
+  useEffect(() => {}, []);
   return (
     <SafeLayout>
       <Nav />

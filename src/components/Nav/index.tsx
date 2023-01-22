@@ -35,9 +35,24 @@ export function Nav() {
       class={css({padding: "0.5rem"})}
     >
       <Box flex={1} row class={css({gap: "1rem"})}>
-        <A href="/app/cards/physical">Physical Cards</A>
-        <A href="/app/cards/virtual">Virtual Cards</A>
-        <A href="/app/cards/transactions">Your Transactions</A>
+        <A
+          class={css({color: "var(--kit-theme-fg)", fontWeight: "bold"})}
+          href="/app/cards/physical"
+        >
+          Physical Cards
+        </A>
+        <A
+          class={css({color: "var(--kit-theme-fg)", fontWeight: "bold"})}
+          href="/app/cards/virtual"
+        >
+          Virtual Cards
+        </A>
+        <A
+          class={css({color: "var(--kit-theme-fg)", fontWeight: "bold"})}
+          href="/app/cards/transactions"
+        >
+          Transactions
+        </A>
       </Box>
       <button
         ref={dropdownSiblingRef}
