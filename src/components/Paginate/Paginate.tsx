@@ -3,7 +3,7 @@ import {Renderable, useEffect, useState} from "@hydrophobefireman/ui-lib";
 interface PaginateProps<T> {
   atOnce: number;
   items: T[];
-  render(item: T): Renderable;
+  render(item: T, i: number): Renderable;
   containerClass?: string | string[];
   nextButtonClass?: string | string[];
   previousButtonClass?: string | string[];
@@ -11,11 +11,13 @@ interface PaginateProps<T> {
   dualButtons?: boolean;
   nextText?: string;
   previousText?: string;
+  listBoxClass?: string;
   buttonClass?: string;
 }
 export function Paginate<T>({
   atOnce,
   items,
+  listBoxClass,
   containerClass,
   render,
   nextButtonClass,
@@ -62,7 +64,7 @@ export function Paginate<T>({
   return (
     <div class={containerClass}>
       {dualButtons && buttons}
-      <div>{list}</div>
+      <div class={listBoxClass}>{list}</div>
       {buttons}
     </div>
   );
@@ -70,14 +72,14 @@ export function Paginate<T>({
 
 function useCurrentItems(
   all: any[],
-  render: (a: any) => Renderable,
+  render: (a: any, i: number) => Renderable,
   currentIndex: number,
   endndex: number
 ) {
   function getItems() {
     const items = [];
     for (let i = currentIndex; i < Math.min(endndex, all.length); i++) {
-      items.push(render(all[i]));
+      items.push(render(all[i], i));
     }
     return items;
   }

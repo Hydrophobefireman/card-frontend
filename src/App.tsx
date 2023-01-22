@@ -1,16 +1,19 @@
 import "@kit/styles";
+import "@kit/css-reset";
+import "~/App.css";
+import "~/styles/cards.css";
 
-// javascript is supported
-import "./App.css";
+import {Router} from "~/_router";
+import {AppLoader} from "~/components/AppLoader";
 
 import {VNode, render} from "@hydrophobefireman/ui-lib";
-
-import {Router} from "./_router";
 
 function App(): VNode {
   return (
     <main>
-      <Router />
+      <AppLoader>
+        <Router />
+      </AppLoader>
     </main>
   );
 }

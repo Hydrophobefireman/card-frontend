@@ -9,14 +9,12 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const {autoPrefixCSS} = require("catom/dist/css");
 const babel = require("./.babelconfig");
 const uiConfig = require("./ui.config.json");
-const {browserslistToTargets, transform} = require("lightningcss");
-const browserslist = require("browserslist");
 const mode = process.env.NODE_ENV;
 const isProd = mode === "production";
 const {outputDir, staticFilePrefix, inlineCSS, enableCatom, fonts} = uiConfig;
-const browserslistConfig = browserslistToTargets(
-  browserslist("last 2 versions")
-);
+// const browserslistConfig = browserslistToTargets(
+//   browserslist("last 2 versions")
+// );
 function prodOrDev(a, b) {
   return isProd ? a : b;
 }
@@ -115,7 +113,7 @@ function getCfg(isLegacy) {
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".json"],
-      alias: {"@": srcPath("src"), "@kit": "@hydrophobefireman/kit"},
+      alias: {"~": srcPath("src"), "@kit": "@hydrophobefireman/kit"},
     },
     mode,
     optimization: {
@@ -125,7 +123,7 @@ function getCfg(isLegacy) {
           new TerserWebpackPlugin({parallel: true}),
           new CssMinimizerPlugin({
             minify: CssMinimizerPlugin.lightningCssMinify,
-            parallel: Math.floor(require("os").cpus()?.length / 2) || 1,
+            parallel: require("os").cpus()?.length || 1,
           }),
         ],
         []
@@ -183,12 +181,14 @@ function getCfg(isLegacy) {
         filename: `${staticFilePrefix}/main-[contenthash].css`,
       }),
       isProd && inlineCSS && new HTMLInlineCSSWebpackPlugin({}),
-      new WebpackModuleNoModulePlugin({
-        mode: isLegacy ? "legacy" : "modern",
-        fonts,
-      }),
+      new WebpackModuleNoModulePlugin(
+        Object.assign(
+          {mode: isLegacy ? "legacy" : "modern", fonts},
+          prodOrDev({outputMode: "minimal"}, {})
+        )
+      ),
     ].filter(Boolean),
   };
 }
 
-module.exports = isProd ? [getCfg(false), getCfg(true)] : getCfg(false);
+module.exports = getCfg(false);
