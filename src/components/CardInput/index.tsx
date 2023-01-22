@@ -1,6 +1,7 @@
 import Payment from "payment";
 import {IPhysicalCard} from "~/handlers/cards";
 
+import {useAlerts} from "@hydrophobefireman/kit/alerts";
 // ported from: https://raw.githubusercontent.com/amaroteam/react-credit-cards/master/src/index.js
 // since we don't use react
 import {Component} from "@hydrophobefireman/ui-lib";
@@ -269,7 +270,17 @@ interface CardInputTypes {
 
 function CardInput(props: CardInputTypes) {
   const res = {locale: {valid: "expires"}, ...props};
-  return <CardInputRoot {...res} />;
+  const {show} = useAlerts();
+  return (
+    <div
+      onClick={async () => {
+        await navigator.clipboard.writeText("" + res.number);
+        show({content: "Card copied!"});
+      }}
+    >
+      <CardInputRoot {...res} />
+    </div>
+  );
 }
 
 export function CardInputObj({
