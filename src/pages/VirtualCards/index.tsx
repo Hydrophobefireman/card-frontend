@@ -130,6 +130,7 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
     }
     close();
   }
+  const cardMap = Object.fromEntries(resp.cards.map((x) => [x.card_id, x]));
   return (
     <Modal active onEscape={close} onClickOutside={close}>
       <Box class={css({margin: "2rem"})}>
@@ -155,7 +156,11 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
         <ThemeInput label="CVV" value={"" + card.card_cvv} disabled />
         <ThemeInput label="Zip" value={"" + card.card_zipcode} disabled />
         <Box row class={css({flexWrap: "wrap"})}>
-          {}
+          {card.config.physical_ids.map((x) => (
+            <div>
+              <CardInputObj card={cardMap[x]} />
+            </div>
+          ))}
         </Box>
       </Box>
     </Modal>

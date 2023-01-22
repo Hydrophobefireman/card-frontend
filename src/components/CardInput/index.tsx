@@ -283,7 +283,11 @@ export function CardInputObj({
     <CardInput
       focused={focused}
       cvc={card.blob.cvc}
-      expiry={card.blob.expiry.month + "/" + card.blob.expiry.year}
+      expiry={`${
+        card.blob.expiry.month < 10
+          ? `0${card.blob.expiry.month}`
+          : card.blob.expiry.month
+      }/${card.blob.expiry.year}`}
       name={card.blob.name}
       number={card.blob.number}
     />
