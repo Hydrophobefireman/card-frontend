@@ -141,67 +141,70 @@ function CardDetails({card, close}: {card: IPhysicalCard; close(): void}) {
       return;
     }
   }
+  //onClickOutside={close} onEscape={close} active={!!card}
   return (
-    <Modal onClickOutside={close} onEscape={close} active={!!card}>
-      <Box class={css({width: "100%", padding: "1rem"})}>
-        <Box
-          horizontal="right"
-          class={css({width: "100%", marginBottom: "1rem"})}
-        >
-          <TextButton
-            mode="error"
-            variant="shadow"
-            onClick={() => deleteCard(card)}
+    <div class="kit-mask" onClick={close}>
+      <div class={"kit-modal"} onClick={(e) => e.stopPropagation()}>
+        <Box class={css({width: "100%", padding: "1rem"})}>
+          <Box
+            horizontal="right"
+            class={css({width: "100%", marginBottom: "1rem"})}
           >
-            delete
-          </TextButton>
-        </Box>
-
-        <CardInputObj card={card} focused="name" />
-        <Form
-          onSubmit={async () => {
-            const {result} = updatePhysicalCard(card, {
-              ...card.blob,
-              limit: +limit,
-            });
-            const {data, error} = await result;
-            if (error) {
-              persist({
-                content: error,
-                type: "error",
-                onActionClick: () => deleteCard(card),
-                actionText: "retry",
-                cancelText: "okay",
-              });
-              return;
-            }
-            close();
-          }}
-        >
-          <Box class={css({marginTop: "2rem"})}>
-            <div class={css({marginBottom: "1rem"})}>
-              Card type: <b>{card.blob.version}</b>
-            </div>
-
-            <ThemeInput
-              label="Limit (USD)"
-              value={limit}
-              setValue={setLimit}
-              type="number"
-            />
-            <ThemeInput
-              label="Spent this month (USD)"
-              value={card.blob.spent || "0"}
-              type="number"
-              disabled
-            />
+            <TextButton
+              mode="error"
+              variant="shadow"
+              onClick={() => deleteCard(card)}
+            >
+              delete
+            </TextButton>
           </Box>
-          <TextButton variant="shadow" mode="success">
-            Save
-          </TextButton>
-        </Form>
-      </Box>
-    </Modal>
+
+          <CardInputObj card={card} focused="name" />
+          <Form
+            onSubmit={async () => {
+              const {result} = updatePhysicalCard(card, {
+                ...card.blob,
+                limit: +limit,
+              });
+              const {data, error} = await result;
+              if (error) {
+                persist({
+                  content: error,
+                  type: "error",
+                  onActionClick: () => deleteCard(card),
+                  actionText: "retry",
+                  cancelText: "okay",
+                });
+                return;
+              }
+              close();
+            }}
+          >
+            <Box class={css({marginTop: "2rem"})}>
+              <div class={css({marginBottom: "1rem"})}>
+                Card type: <b>{card.blob.version}</b>
+              </div>
+
+              <ThemeInput
+                label="Limit (USD)"
+                value={limit}
+                setValue={setLimit}
+                type="number"
+              />
+              <ThemeInput
+                label="Spent this month (USD)"
+                value={card.blob.spent || "0"}
+                type="number"
+                disabled
+              />
+            </Box>
+            <TextButton variant="shadow" mode="success">
+              Save
+            </TextButton>
+          </Form>
+        </Box>
+      </div>
+    </div>
   );
 }
 
@@ -267,73 +270,77 @@ export function CardInputModal({
     mastercard: ["standard", "world"],
   };
   return (
-    <Modal active={active} onClickOutside={close} onEscape={close}>
-      <Form onSubmit={handleSubmit}>
-        <div class={css({padding: "2rem"})}>
-          <CardInput
-            cvc={cvc}
-            expiry={expires}
-            locale={{valid: "expires"}}
-            name={name}
-            number={number}
-            focused={focused}
-          />
-          <Box class={css({marginTop: "2rem"})}>
-            <ThemeInput
-              value={name}
-              setValue={setName}
-              label="Name"
-              onFocus={() => setFocused("name")}
+    <div class="kit-mask" onClick={close}>
+      <div class={"kit-modal"} onClick={(e) => e.stopPropagation()}>
+        <Form onSubmit={handleSubmit}>
+          <div class={css({padding: "2rem"})}>
+            <CardInput
+              cvc={cvc}
+              expiry={expires}
+              locale={{valid: "expires"}}
+              name={name}
+              number={number}
+              focused={focused}
             />
-            <ThemeInput
-              value={number}
-              setValue={setNumber}
-              label="Number"
-              helperText="Invalid card"
-              errored={number.length > 10 && !fns.validateCardNumber(number)}
-              type="tel"
-              onFocus={() => setFocused("number")}
-            />
-            <ThemeInput
-              value={cvc}
-              setValue={setCVC}
-              label="CVC"
-              pattern="\d+"
-              maxLength={4}
-              errored={cvc.length >= 3 && !fns.validateCardCVC(cvc)}
-              onFocus={() => setFocused("cvc")}
-            />
-            <ThemeInput
-              errored={expires.length >= 4 && !fns.validateCardExpiry(expires)}
-              value={expires}
-              setValue={setExpires}
-              label="Expiry"
-              onFocus={() => setFocused("expiry")}
-            />
-            <ThemeInput value={zip} setValue={setZip} label="Zip" />
-            {options[fns.cardType(number)] && (
-              <Box>
-                <select
-                  class={css({background: "white", marginBottom: "1rem"})}
-                  label="Type"
-                  onChange={(e) => setType(e.currentTarget.value)}
-                  value={type as any}
-                >
-                  <option selected disabled>
-                    Select
-                  </option>
-                  {(options[fns.cardType(number)] ?? []).map((x: any) => (
-                    <option value={x}>{x}</option>
-                  ))}
-                </select>
-              </Box>
-            )}
-            <TextButton mode="success" variant="shadow">
-              Add
-            </TextButton>
-          </Box>
-        </div>
-      </Form>
-    </Modal>
+            <Box class={css({marginTop: "2rem"})}>
+              <ThemeInput
+                value={name}
+                setValue={setName}
+                label="Name"
+                onFocus={() => setFocused("name")}
+              />
+              <ThemeInput
+                value={number}
+                setValue={setNumber}
+                label="Number"
+                helperText="Invalid card"
+                errored={number.length > 10 && !fns.validateCardNumber(number)}
+                type="tel"
+                onFocus={() => setFocused("number")}
+              />
+              <ThemeInput
+                value={cvc}
+                setValue={setCVC}
+                label="CVC"
+                pattern="\d+"
+                maxLength={4}
+                errored={cvc.length >= 3 && !fns.validateCardCVC(cvc)}
+                onFocus={() => setFocused("cvc")}
+              />
+              <ThemeInput
+                errored={
+                  expires.length >= 4 && !fns.validateCardExpiry(expires)
+                }
+                value={expires}
+                setValue={setExpires}
+                label="Expiry"
+                onFocus={() => setFocused("expiry")}
+              />
+              <ThemeInput value={zip} setValue={setZip} label="Zip" />
+              {options[fns.cardType(number)] && (
+                <Box>
+                  <select
+                    class={css({background: "white", marginBottom: "1rem"})}
+                    label="Type"
+                    onChange={(e) => setType(e.currentTarget.value)}
+                    value={type as any}
+                  >
+                    <option selected disabled>
+                      Select
+                    </option>
+                    {(options[fns.cardType(number)] ?? []).map((x: any) => (
+                      <option value={x}>{x}</option>
+                    ))}
+                  </select>
+                </Box>
+              )}
+              <TextButton mode="success" variant="shadow">
+                Add
+              </TextButton>
+            </Box>
+          </div>
+        </Form>
+      </div>
+    </div>
   );
 }
