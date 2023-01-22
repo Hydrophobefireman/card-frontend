@@ -9,6 +9,7 @@ import {
   deleteVirtualCardRoute,
   getPhysicalCardsRoute,
   getVirtualCardsRoute,
+  listTxRoute,
   patchPhysicalCardsRoute,
   putPhysicalCardsRoute,
 } from "./routes";
@@ -17,7 +18,7 @@ export interface IPhysicalCard {
   card_id: string;
   blob: {
     limit: number;
-    balance: number;
+    spent: number;
     cvc: string;
     expiry: {month: number; year: number};
     name: string;
@@ -96,4 +97,17 @@ export function updatePhysicalCard(
 
 export function addVirtualCard(selectedIds: string[]) {
   return requests.postJSON(addVirtualCardRoute, {physical_ids: selectedIds});
+}
+export interface ITx {
+  card_id: string;
+  tx_id: string;
+  user_id: string;
+  date: string;
+  amount: string;
+  category: string;
+  name: string;
+  cards_used: Array<[string, number]>;
+}
+export function useTransactions() {
+  return useResource(() => requests.get<ITx[]>(listTxRoute), []);
 }

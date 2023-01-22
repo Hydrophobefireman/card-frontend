@@ -167,7 +167,7 @@ function CardDetails({card, close}: {card: IPhysicalCard; close(): void}) {
             />
             <ThemeInput
               label="Spent this month (USD)"
-              value={card.blob.balance ?? "0"}
+              value={card.blob.spent ?? "0"}
               type="number"
               disabled
             />

@@ -1,8 +1,8 @@
-const BASE = location.href.includes("localhost")
-  ? "http://localhost:5000"
-  : (() => {
-      throw new Error("not implemented");
-    })();
+const FORCE_USE_GLOBAL = !true;
+const BASE =
+  location.href.includes("localhost") && !FORCE_USE_GLOBAL
+    ? "http://localhost:5000"
+    : "https://virt-card.herokuapp.com";
 
 function getURL(path: string) {
   return new URL(path, BASE).href;
@@ -25,3 +25,5 @@ export const addVirtualCardRoute = getURL("/users/cards/virtual/create");
 export const patchVirtualCardRoute = (id: string) =>
   getURL(`/users/cards/virtual/${id}`);
 export const deleteVirtualCardRoute = patchVirtualCardRoute;
+
+export const listTxRoute = getURL("/users/cards/transactions");
