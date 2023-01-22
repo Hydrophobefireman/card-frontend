@@ -166,6 +166,7 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
         </Box>
         <div class={css({filter: "hue-rotate(45deg)"})}>
           <CardInput
+            copy
             cvc={card.card_cvv}
             expiry={card.card_expiry.month + "/" + card.card_expiry.year}
             name={card.name}
