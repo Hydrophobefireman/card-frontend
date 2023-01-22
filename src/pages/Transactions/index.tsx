@@ -40,7 +40,9 @@ export function TXBox() {
   );
   return (
     <Box>
-      <Text.h1>Your transactions will show up here</Text.h1>
+      {!resp?.length ? (
+        <Text.h1>Your transactions will show up here</Text.h1>
+      ) : null}
       <Box
         class={css({
           gap: "1.5rem",
