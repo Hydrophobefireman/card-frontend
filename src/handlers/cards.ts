@@ -1,7 +1,11 @@
 import {createState} from "statedrive";
 import {requests} from "~/util/bridge";
 
-import {useCachingResource, useResource} from "@hydrophobefireman/kit/hooks";
+import {
+  useCachingResource,
+  useInterval,
+  useResource,
+} from "@hydrophobefireman/kit/hooks";
 
 import {
   addVirtualCardRoute,
@@ -48,7 +52,8 @@ export interface IVirtualCard {
 }
 const store = createState({});
 const vstore = createState({});
-export function usePhysicalCards() {
+
+const _upcards = () => {
   return useCachingResource(
     () =>
       requests.get<{
@@ -57,8 +62,17 @@ export function usePhysicalCards() {
     [],
     store
   );
+};
+
+export function usePhysicalCards() {
+  const {fetchResource, ...rest} = _upcards();
+  useInterval(() => {
+    fetchResource();
+  }, 1000);
+  return {fetchResource, ...rest};
 }
-export function useVirtualCards() {
+
+const _uvCards = () => {
   return useCachingResource(
     () =>
       requests.get<{
@@ -67,6 +81,13 @@ export function useVirtualCards() {
     [],
     vstore
   );
+};
+export function useVirtualCards() {
+  const {fetchResource, ...rest} = _uvCards();
+  useInterval(() => {
+    fetchResource();
+  }, 1000);
+  return {fetchResource, ...rest};
 }
 
 export function addPhysicalCard(obj: {
@@ -108,6 +129,14 @@ export interface ITx {
   name: string;
   cards_used: Array<[string, number]>;
 }
+
+const txStore = createState({});
+const _utx = () =>
+  useCachingResource(() => requests.get<ITx[]>(listTxRoute), [], txStore);
 export function useTransactions() {
-  return useResource(() => requests.get<ITx[]>(listTxRoute), []);
+  const {fetchResource, ...rest} = _utx();
+  useInterval(() => {
+    fetchResource();
+  }, 1000);
+  return {fetchResource, ...rest};
 }
