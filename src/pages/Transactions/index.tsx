@@ -93,64 +93,66 @@ export function TXBox() {
             </Box>
           </Modal>
         )}
-        {resp?.map((x) => {
-          const card = o[x.card_id];
-          return (
-            <div
-              class={css({
-                width: "100%",
-                position: "relative",
-                minHeight: "2rem",
-              })}
-            >
+        {resp
+          ?.sort((a, b) => a.date.localeCompare(b.date))
+          .map((x) => {
+            const card = o[x.card_id];
+            return (
               <div
                 class={css({
-                  transform: "scale(.25) translate(-30rem,-17rem)",
-                  position: "absolute",
-                  filter: "hue-rotate(45deg) drop-shadow(2px 4px 6px black)",
-                  top: "0",
-                  left: "0",
+                  width: "100%",
+                  position: "relative",
+                  minHeight: "2rem",
                 })}
               >
-                <CardInput
-                  cvc={card.card_cvv}
-                  expiry={`${card.card_expiry.month}/${card.card_expiry.year}`}
-                  focused="name"
-                  number={card.card_number}
-                  name={card.name}
-                />
-              </div>
-              <Box
-                row
-                horizontal="left"
-                class={css({width: "100%", gap: "2rem"})}
-              >
-                <div class={css({marginLeft: "5rem"})}>
-                  <Text.div color="kit-shade-5">${x.amount}</Text.div>
-                  <div>{x.name}</div>
-                </div>
-                <div>
-                  <div>{x.category}</div>
-                  <div>{new Date(+x.date * 1000).toDateString()}</div>
-                </div>
                 <div
                   class={css({
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    display: "flex",
+                    transform: "scale(.25) translate(-30rem,-17rem)",
+                    position: "absolute",
+                    filter: "hue-rotate(45deg) drop-shadow(2px 4px 6px black)",
+                    top: "0",
+                    left: "0",
                   })}
                 >
-                  <button onClick={() => setActiveTx(x)}>
-                    <DotsHorizontalIcon
-                      class={css({transform: "rotate(90deg)"})}
-                    />
-                  </button>
+                  <CardInput
+                    cvc={card.card_cvv}
+                    expiry={`${card.card_expiry.month}/${card.card_expiry.year}`}
+                    focused="name"
+                    number={card.card_number}
+                    name={card.name}
+                  />
                 </div>
-              </Box>
-            </div>
-          );
-        })}
+                <Box
+                  row
+                  horizontal="left"
+                  class={css({width: "100%", gap: "2rem"})}
+                >
+                  <div class={css({marginLeft: "5rem"})}>
+                    <Text.div color="kit-shade-5">${x.amount}</Text.div>
+                    <div>{x.name}</div>
+                  </div>
+                  <div>
+                    <div>{x.category}</div>
+                    <div>{new Date(+x.date * 1000).toDateString()}</div>
+                  </div>
+                  <div
+                    class={css({
+                      flex: 1,
+                      alignItems: "center",
+                      justifyContent: "flex-end",
+                      display: "flex",
+                    })}
+                  >
+                    <button onClick={() => setActiveTx(x)}>
+                      <DotsHorizontalIcon
+                        class={css({transform: "rotate(90deg)"})}
+                      />
+                    </button>
+                  </div>
+                </Box>
+              </div>
+            );
+          })}
       </Box>
     </Box>
   );
