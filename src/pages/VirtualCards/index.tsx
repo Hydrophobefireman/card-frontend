@@ -202,30 +202,32 @@ export function CardInputModal({
       </Text.h1>
       <Form onSubmit={handleSubmit}>
         <Box class={css({gap: "2rem", padding: "0.25rem"})}>
-          {resp.cards.map((card) => (
-            <div
-              role="button"
-              class={[
-                css({transition: "var(--kit-transition)"}),
-                selectedIds.has(card.card_id)
-                  ? ""
-                  : css({filter: "grayscale(1)"}),
-              ]}
-              onClick={() => {
-                setSelectedIds((p) => {
-                  const next = new Set(p);
-                  if (next.has(card.card_id)) {
-                    next.delete(card.card_id);
-                  } else {
-                    next.add(card.card_id);
-                  }
-                  return next;
-                });
-              }}
-            >
-              <CardInputObj card={card} />
-            </div>
-          ))}
+          {resp.cards
+            .filter((x) => x.active)
+            .map((card) => (
+              <div
+                role="button"
+                class={[
+                  css({transition: "var(--kit-transition)"}),
+                  selectedIds.has(card.card_id)
+                    ? ""
+                    : css({filter: "grayscale(1)"}),
+                ]}
+                onClick={() => {
+                  setSelectedIds((p) => {
+                    const next = new Set(p);
+                    if (next.has(card.card_id)) {
+                      next.delete(card.card_id);
+                    } else {
+                      next.add(card.card_id);
+                    }
+                    return next;
+                  });
+                }}
+              >
+                <CardInputObj card={card} />
+              </div>
+            ))}
           <TextButton mode="success" variant="shadow">
             Create
           </TextButton>
