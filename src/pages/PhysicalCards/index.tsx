@@ -101,7 +101,11 @@ function CardRenderer() {
         {resp?.cards
           ?.filter((x) => x.active)
           .map((x) => (
-            <div role="button" onClick={() => showCardInfo(x)}>
+            <div
+              role="button"
+              class={css({filter: "drop-shadow(2px 4px 6px black)"})}
+              onClick={() => showCardInfo(x)}
+            >
               <CardInputObj card={x} focused="name" />
             </div>
           ))}

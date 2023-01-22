@@ -96,7 +96,9 @@ function CardRenderer() {
           .map((x) => (
             <div
               role="button"
-              class={css({filter: "hue-rotate(45deg)"})}
+              class={css({
+                filter: "hue-rotate(45deg) drop-shadow(2px 4px 6px black)",
+              })}
               onClick={() => showCardInfo(x)}
             >
               <CardInput
@@ -234,10 +236,15 @@ export function CardInputModal({
               <div
                 role="button"
                 class={[
-                  css({transition: "var(--kit-transition)"}),
+                  css({
+                    transition: "var(--kit-transition)",
+                    filter: "drop-shadow(2px 4px 6px black)",
+                  }),
                   selectedIds.has(card.card_id)
                     ? ""
-                    : css({filter: "grayscale(1)"}),
+                    : css({
+                        filter: "grayscale(1) drop-shadow(2px 4px 6px black)",
+                      }),
                 ]}
                 onClick={() => {
                   setSelectedIds((p) => {

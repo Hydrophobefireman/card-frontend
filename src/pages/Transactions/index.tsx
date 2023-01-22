@@ -70,9 +70,15 @@ export function TXBox() {
             </Text.h1>
             <Box>
               {activeTx.cards_used.map((x) => (
-                <div>
+                <div
+                  role="button"
+                  class={css({
+                    filter: "hue-rotate(0deg) drop-shadow(2px 4px 6px black)",
+                    marginBottom: "1rem",
+                  })}
+                >
                   <CardInputObj card={pMap[x[0]]} />
-                  <div>${x[1]}</div>
+                  <div class={css({marginTop: "1rem"})}>${x[1]}</div>
                 </div>
               ))}
             </Box>
@@ -92,7 +98,7 @@ export function TXBox() {
                 class={css({
                   transform: "scale(.25) translate(-30rem,-17rem)",
                   position: "absolute",
-                  filter: "hue-rotate(45deg)",
+                  filter: "hue-rotate(45deg) drop-shadow(2px 4px 6px black)",
                   top: "0",
                   left: "0",
                 })}
