@@ -247,10 +247,11 @@ export function CardInputModal({
                 class={[
                   css({
                     transition: "var(--kit-transition)",
-                    filter: "drop-shadow(2px 4px 6px black)",
                   }),
                   selectedIds.has(card.card_id)
-                    ? ""
+                    ? css({
+                        filter: "grayscale(0) drop-shadow(2px 4px 6px black)",
+                      })
                     : css({
                         filter: "grayscale(1) drop-shadow(2px 4px 6px black)",
                       }),
