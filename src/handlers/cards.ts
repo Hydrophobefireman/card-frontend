@@ -35,7 +35,7 @@ export interface IVirtualCard {
   id_: string;
   card_number: string;
   card_cvv: string;
-  card_expiry: string;
+  card_expiry: {month: string; year: string};
   name: string;
   card_address: string;
   card_zipcode: string;

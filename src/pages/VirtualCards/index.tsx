@@ -100,7 +100,7 @@ function CardRenderer() {
             >
               <CardInput
                 cvc={x.card_cvv}
-                expiry={x.card_expiry}
+                expiry={x.card_expiry.month + "/" + x.card_expiry.year}
                 name={x.name ?? user.name}
                 number={x.card_number}
                 focused="name"
@@ -145,7 +145,7 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
         <div class={css({filter: "hue-rotate(45deg)"})}>
           <CardInput
             cvc={card.card_cvv}
-            expiry={card.card_expiry}
+            expiry={card.card_expiry.month + "/" + card.card_expiry.year}
             name={card.name}
             number={card.card_number}
             focused="name"
