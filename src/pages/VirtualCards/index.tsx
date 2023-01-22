@@ -154,7 +154,9 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
         <ThemeInput label="Spent" value={"" + card.config.spent} disabled />
         <ThemeInput label="CVV" value={"" + card.card_cvv} disabled />
         <ThemeInput label="Zip" value={"" + card.card_zipcode} disabled />
-        <Box row class={css({flexWrap: "wrap"})}></Box>
+        <Box row class={css({flexWrap: "wrap"})}>
+          {}
+        </Box>
       </Box>
     </Modal>
   );
@@ -189,6 +191,8 @@ export function CardInputModal({
     await fetchCards();
     close();
   }
+  const pcards = resp.cards.filter((x) => x.active);
+
   return (
     <Modal active={active} onClickOutside={close} onEscape={close}>
       <Text.h1
@@ -203,9 +207,10 @@ export function CardInputModal({
       </Text.h1>
       <Form onSubmit={handleSubmit}>
         <Box class={css({gap: "2rem", padding: "0.25rem"})}>
-          {resp.cards
-            .filter((x) => x.active)
-            .map((card) => (
+          {!pcards?.length ? (
+            <>No physical cards added</>
+          ) : (
+            pcards.map((card) => (
               <div
                 role="button"
                 class={[
@@ -228,10 +233,13 @@ export function CardInputModal({
               >
                 <CardInputObj card={card} />
               </div>
-            ))}
-          <TextButton mode="success" variant="shadow">
-            Create
-          </TextButton>
+            ))
+          )}
+          {pcards?.length > 0 && (
+            <TextButton mode="success" variant="shadow">
+              Create
+            </TextButton>
+          )}
         </Box>
       </Form>
     </Modal>

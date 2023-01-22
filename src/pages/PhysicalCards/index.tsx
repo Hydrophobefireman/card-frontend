@@ -277,6 +277,7 @@ export function CardInputModal({
               setValue={setCVC}
               label="CVC"
               pattern="\d+"
+              maxLength={3}
               errored={cvc.length === 3 && !fns.validateCardCVC(cvc)}
               onFocus={() => setFocused("cvc")}
             />
