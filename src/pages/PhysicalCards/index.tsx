@@ -46,7 +46,13 @@ function CardRenderer() {
   }
   return (
     <div class={css({padding: "2.5rem"})}>
-      <Text.h1 class={css({fontSize: "1.5rem", fontWeight: "bold"})}>
+      <Text.h1
+        class={css({
+          fontSize: "1.5rem",
+          fontWeight: "bold",
+          filter: "drop-shadow(2px 4px 6px black)",
+        })}
+      >
         Your Physical Cards
       </Text.h1>
       <Box horizontal="center">
@@ -75,6 +81,7 @@ function CardRenderer() {
           class={css({
             "--kit-radius": "15px",
             "--stroke": "white",
+            boxShadow: "var(--kit-shadow)",
             pseudo: {
               ":hover": {
                 "--stroke": "var(--kit-theme-fg)",

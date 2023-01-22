@@ -39,7 +39,13 @@ export function TXBox() {
     physicalCards.cards.map((x) => [x.card_id, x])
   );
   return (
-    <Box class={css({"--kit-foreground": "black", color: "black"} as any)}>
+    <Box
+      class={css({
+        "--kit-foreground": "black",
+        color: "black",
+        borderRadius: "15px",
+      } as any)}
+    >
       {!resp?.length ? (
         <Text.h1>Your transactions will show up here</Text.h1>
       ) : null}

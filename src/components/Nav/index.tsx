@@ -36,19 +36,31 @@ export function Nav() {
     >
       <Box flex={1} row class={css({gap: "1rem"})}>
         <A
-          class={css({color: "var(--kit-theme-fg)", fontWeight: "bold"})}
+          class={css({
+            filter: "drop-shadow(2px 4px 6px black)",
+
+            fontWeight: "bold",
+          })}
           href="/app/cards/physical"
         >
           Physical Cards
         </A>
         <A
-          class={css({color: "var(--kit-theme-fg)", fontWeight: "bold"})}
+          class={css({
+            filter: "drop-shadow(2px 4px 6px black)",
+
+            fontWeight: "bold",
+          })}
           href="/app/cards/virtual"
         >
           Virtual Cards
         </A>
         <A
-          class={css({color: "var(--kit-theme-fg)", fontWeight: "bold"})}
+          class={css({
+            filter: "drop-shadow(2px 4px 6px black)",
+
+            fontWeight: "bold",
+          })}
           href="/app/cards/transactions"
         >
           Transactions

@@ -27,4 +27,9 @@ html {
 .kit-modal {
   --kit-foreground: #1d1d1d;
   color: #1d1d1d;
+  background-image: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 0.4) 0%,
+    rgba(148, 187, 233, 0.4) 100%
+  );
 }
