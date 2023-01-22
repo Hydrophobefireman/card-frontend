@@ -1,8 +1,9 @@
 import {css} from "catom";
-import {CardInput} from "~/components/CardInput";
+import {CardInput, CardInputObj} from "~/components/CardInput";
 import {Nav} from "~/components/Nav";
 import {SafeLayout} from "~/components/SafeLayout";
 import {
+  ITx,
   usePhysicalCards,
   useTransactions,
   useVirtualCards,
@@ -14,7 +15,9 @@ import {
   MenuIcon,
 } from "@hydrophobefireman/kit-icons";
 import {Box} from "@hydrophobefireman/kit/container";
+import {Modal} from "@hydrophobefireman/kit/modal";
 import {Text} from "@hydrophobefireman/kit/text";
+import {useState} from "@hydrophobefireman/ui-lib";
 
 export default function Transactions() {
   return (
@@ -29,9 +32,12 @@ export function TXBox() {
   const {resp} = useTransactions();
   const {resp: virtCards} = useVirtualCards();
   const {resp: physicalCards} = usePhysicalCards();
-
+  const [activeTx, setActiveTx] = useState<ITx>(null);
   if (!virtCards?.cards?.map || !physicalCards?.cards?.map) return;
   const o = Object.fromEntries(virtCards.cards.map((x) => [x.card_id, x]));
+  const pMap = Object.fromEntries(
+    physicalCards.cards.map((x) => [x.card_id, x])
+  );
   return (
     <Box>
       <Text.h1>Your transactions will show up here</Text.h1>
@@ -44,6 +50,21 @@ export function TXBox() {
           padding: "3rem",
         })}
       >
+        {activeTx && (
+          <Modal active>
+            <Text.h1 class={css({fontWeight: "bold", fontSize: "1.2rem"})}>
+              Cards Used
+            </Text.h1>
+            <Box>
+              {activeTx.cards_used.map((x) => (
+                <div>
+                  <CardInputObj card={pMap[x[0]]} />
+                  <div>${x[1]}</div>
+                </div>
+              ))}
+            </Box>
+          </Modal>
+        )}
         {resp?.map((x) => {
           const card = o[x.card_id];
           return (
@@ -91,7 +112,7 @@ export function TXBox() {
                     display: "flex",
                   })}
                 >
-                  <button>
+                  <button onClick={() => setActiveTx(x)}>
                     <DotsHorizontalIcon
                       class={css({transform: "rotate(90deg)"})}
                     />
