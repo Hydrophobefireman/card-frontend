@@ -122,10 +122,13 @@ export function TXBox() {
                     name={card.name}
                   />
                 </div>
-                <Box
-                  row
-                  horizontal="left"
-                  class={css({width: "100%", gap: "2rem"})}
+                <div
+                  class={css({
+                    width: "100%",
+                    gap: "2rem",
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr 1fr",
+                  })}
                 >
                   <div class={css({marginLeft: "5rem"})}>
                     <Text.div color="kit-shade-5">${x.amount}</Text.div>
@@ -149,7 +152,7 @@ export function TXBox() {
                       />
                     </button>
                   </div>
-                </Box>
+                </div>
               </div>
             );
           })}
