@@ -53,11 +53,13 @@ function CardRenderer() {
             }}
           />
         )}
-        <CardInputModal
-          fetchCards={fetchResource}
-          active={addCardModel}
-          close={() => setAddCardModel(false)}
-        />
+        {addCardModel && (
+          <CardInputModal
+            fetchCards={fetchResource}
+            active={addCardModel}
+            close={() => setAddCardModel(false)}
+          />
+        )}
         <TextButton
           prefix={<PlusIcon color="white" />}
           mode="success"
@@ -277,8 +279,8 @@ export function CardInputModal({
               setValue={setCVC}
               label="CVC"
               pattern="\d+"
-              maxLength={3}
-              errored={cvc.length === 3 && !fns.validateCardCVC(cvc)}
+              maxLength={4}
+              errored={cvc.length >= 3 && !fns.validateCardCVC(cvc)}
               onFocus={() => setFocused("cvc")}
             />
             <ThemeInput
