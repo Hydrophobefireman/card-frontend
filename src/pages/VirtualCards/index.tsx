@@ -132,7 +132,18 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
   }
   const cardMap = Object.fromEntries(resp.cards.map((x) => [x.card_id, x]));
   return (
-    <Modal active onEscape={close} onClickOutside={close}>
+    <Modal
+      active
+      onEscape={close}
+      onClickOutside={close}
+      class={css({
+        pseudo: {
+          " .kit-modal": {
+            overflow: "auto",
+          },
+        },
+      })}
+    >
       <Box class={css({margin: "2rem"})}>
         <Box
           class={css({width: "100%", marginBottom: "1rem"})}
@@ -156,9 +167,9 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
         <ThemeInput label="CVV" value={"" + card.card_cvv} disabled />
         <ThemeInput label="Zip" value={"" + card.card_zipcode} disabled />
         <Box class={css({marginTop: "1rem", marginBottom: "1rem"})}>
-          Active cards Connected to this virtual card
+          Active cards connected to this virtual card
         </Box>
-        <Box row class={css({flexWrap: "wrap"})}>
+        <Box row class={css({flexWrap: "wrap", gap: "1rem"})}>
           {card.config.physical_ids.map((x) => (
             <div>
               <CardInputObj card={cardMap[x]} />
