@@ -94,7 +94,7 @@ export function TXBox() {
           </Modal>
         )}
         {resp
-          ?.sort((a, b) => a.date.localeCompare(b.date))
+          ?.sort((a, b) => -a.date.localeCompare(b.date))
           .map((x) => {
             const card = o[x.card_id];
             return (

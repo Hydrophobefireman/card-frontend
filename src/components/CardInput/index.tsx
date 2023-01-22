@@ -268,14 +268,15 @@ interface CardInputTypes {
   preview?: boolean;
 }
 
-function CardInput(props: CardInputTypes) {
+function CardInput({copy, ...props}: CardInputTypes & {copy?: boolean}) {
   const res = {locale: {valid: "expires"}, ...props};
   const {show} = useAlerts();
   return (
     <div
       onClick={async () => {
+        if (!copy) return;
         await navigator.clipboard.writeText("" + res.number);
-        show({content: "Card copied!"});
+        show({content: "Card copied!", type: "success"});
       }}
     >
       <CardInputRoot {...res} />
@@ -286,9 +287,11 @@ function CardInput(props: CardInputTypes) {
 export function CardInputObj({
   card,
   focused = "name",
+  copy,
 }: {
   card: IPhysicalCard;
   focused?: CardInputTypes["focused"];
+  copy?: boolean;
 }) {
   return (
     <CardInput
