@@ -34,6 +34,7 @@ export function Register() {
         content: error,
         cancelText: "Okay",
         actionText: "retry",
+
         type: "error",
         onActionClick() {
           handleRegister();
@@ -44,7 +45,7 @@ export function Register() {
     persist({
       content: "Account created!",
       type: "success",
-      onActionClick: () => redirect("/auth?mode=login"),
+      onActionClick: () => redirect("/"),
       actionText: "Login",
     });
   }
