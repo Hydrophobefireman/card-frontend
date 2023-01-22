@@ -250,10 +250,20 @@ export function CardInputModal({
                   }),
                   selectedIds.has(card.card_id)
                     ? css({
-                        filter: "grayscale(0) drop-shadow(2px 4px 6px black)",
+                        pseudo: {
+                          "> [data-gs]": {
+                            filter:
+                              "grayscale(0) drop-shadow(2px 4px 6px black)",
+                          },
+                        },
                       })
                     : css({
-                        filter: "grayscale(1) drop-shadow(2px 4px 6px black)",
+                        pseudo: {
+                          "> [data-gs]": {
+                            filter:
+                              "grayscale(1) drop-shadow(2px 4px 6px black)",
+                          },
+                        },
                       }),
                 ]}
                 onClick={() => {
@@ -268,7 +278,12 @@ export function CardInputModal({
                   });
                 }}
               >
-                <CardInputObj card={card} />
+                <div data-gs>
+                  <CardInputObj card={card} />
+                </div>
+                <div class={css({marginTop: "1rem"})}>
+                  Card type: <b>{card.blob.version}</b>
+                </div>
               </div>
             ))
           )}

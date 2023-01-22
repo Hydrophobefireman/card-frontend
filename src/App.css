@@ -33,6 +33,7 @@ html {
   --kit-foreground: #1d1d1d;
   color: #1d1d1d;
   background-image: var(--light-gradient);
+  overflow: auto !important;
 }
 
 .kit-input-material:focus ~ label,
