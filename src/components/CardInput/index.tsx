@@ -107,7 +107,7 @@ class CardInputRoot extends Component {
     let month = "";
     let year = "";
 
-    if (date.includes("/")) {
+    if (date?.includes("/")) {
       [month, year] = date.split("/");
     } else if (date.length) {
       month = date.substr(0, 2);

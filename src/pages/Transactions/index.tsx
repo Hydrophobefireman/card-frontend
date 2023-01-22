@@ -64,7 +64,7 @@ export function TXBox() {
               >
                 <CardInput
                   cvc={card.card_cvv}
-                  expiry={card.card_expiry}
+                  expiry={`${card.card_expiry.month}/${card.card_expiry.year}`}
                   focused="name"
                   number={card.card_number}
                   name={card.name}

@@ -155,6 +155,9 @@ function CardDetails({card, close}: {card: IVirtualCard; close(): void}) {
         <ThemeInput label="Spent" value={"" + card.config.spent} disabled />
         <ThemeInput label="CVV" value={"" + card.card_cvv} disabled />
         <ThemeInput label="Zip" value={"" + card.card_zipcode} disabled />
+        <Box class={css({marginTop: "1rem", marginBottom: "1rem"})}>
+          Active cards Connected to this virtual card
+        </Box>
         <Box row class={css({flexWrap: "wrap"})}>
           {card.config.physical_ids.map((x) => (
             <div>
