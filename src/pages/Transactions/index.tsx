@@ -44,6 +44,7 @@ export function TXBox() {
         "--kit-foreground": "black",
         color: "black",
         borderRadius: "15px",
+        background: "var(--light-gradient);",
       } as any)}
     >
       {!resp?.length ? (
